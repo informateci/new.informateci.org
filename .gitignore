@@ -1,2 +1,3 @@
 *.pyc
 secure.py
+.idea/*
