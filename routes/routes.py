@@ -45,4 +45,5 @@ def favicon_route():
 
 @bprint.route('/github')
 def github_route():
-    return '\n'.join([x.name for x in github_obj.get_user('informateci').get_repos()])
+    repos = github_obj.get_user('informateci').get_repos()
+    return render_template('github.html', repos=repos)

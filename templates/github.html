@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block head %}
+<style>
+    .github_repo {
+
+    }
+
+    .github_commit {
+        .hash {
+
+        }
+    }
+</style>
+{% endblock %}
+{% block body %}
+<ul>
+    {% for repo in repos %}
+        <li class="github_repo">{{ repo.name }} - {{ repo.description }}</li>
+            <ul>
+                {% for commit in repo.get_commits()[0:10] %}
+                    <li class="github_commit">
+                        <a class="hash">{{ commit.sha [-8:] }}</a> - {{ commit.get_comments().get_page(0).body }}
+                    </li>
+                {% endfor %}
+            </ul>
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}
