@@ -1,17 +1,18 @@
 __author__ = 'mandrake'
-from flask import render_template, Response, Blueprint
+
+from flask import Blueprint, render_template, Response
 import base64
-from modules.mod_github import github_status, github_status_lock
 
-bprint = Blueprint('bprint', __name__, template_folder='templates')
+routes = Blueprint('index', __name__, template_folder='templates')
+prefix = '/'
 
 
-@bprint.route('/')
+@routes.route('/')
 def index_route():
     return render_template('index.html')
 
 
-@bprint.route('/favicon.ico')
+@routes.route('/favicon.ico')
 def favicon_route():
     return Response(
         base64.decodestring('iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAGXRFWHRTb\
@@ -40,16 +41,3 @@ def favicon_route():
         wADAGdc48ttRnltAAAAAElFTkSuQmCC'),
         mimetype='image/png'
     )
-
-
-@bprint.route('/github')
-def github_route():
-    github_status_lock.acquire(1)
-    local = list(github_status)
-    github_status_lock.release()
-
-    return render_template('github.html', repos=local)
-
-@bprint.route('/calendar')
-def calendar_route():
-    return render_template('calendar.html')
