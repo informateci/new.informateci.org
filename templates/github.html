@@ -17,9 +17,9 @@
     {% for repo in repos %}
         <li class="github_repo">{{ repo.name }} - {{ repo.description }}</li>
             <ul>
-                {% for commit in repo.get_commits()[0:10] %}
+                {% for commit in repo.commits[0:10] %}
                     <li class="github_commit">
-                        <a class="hash">{{ commit.sha [-8:] }}</a> - {{ commit.get_comments().get_page(0).body }}
+                        <a class="hash" style="font-family: monospace">{{ commit.short_sha }}</a> - {{ commit.description }}
                     </li>
                 {% endfor %}
             </ul>

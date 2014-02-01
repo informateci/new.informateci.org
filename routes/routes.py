@@ -1,8 +1,8 @@
 __author__ = 'mandrake'
 from flask import render_template, Response, Blueprint
 import base64
-from modules.mod_github import github_obj
-
+from modules.mod_github import github_status, github_status_lock
+from copy import deepcopy
 
 bprint = Blueprint('bprint', __name__, template_folder='templates')
 
@@ -45,5 +45,9 @@ def favicon_route():
 
 @bprint.route('/github')
 def github_route():
-    repos = github_obj.get_user('informateci').get_repos()
-    return render_template('github.html', repos=repos)
+    local = []
+    github_status_lock.acquire(1)
+    local = list(github_status)
+    github_status_lock.release()
+    ret = render_template('github.html', repos=local)
+    return ret
