@@ -4,12 +4,25 @@
         {% block head %}
         {% endblock %}
         <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" />
-        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css"></script>
+        <link rel="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" />
+        <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+        <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
         <meta charset="UTF-8">
     </head>
     <body>
+        <nav class="navbar navbar-default  navbar-static-top" role="navigation">
+            <div class="container">
+                <div class="navbar-header"><a class="navbar-brand" href="/">Informacchio</a></div>
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li {% if active_page == "home" %}class="active"{% endif %}><a href="/">Home</a></li>
+                        <li {% if active_page == "github" %}class="active"{% endif %}><a href="/github">Github</a></li>
+                        <li {% if active_page == "calendar" %}class="active"{% endif %}><a href="/calendar">Calendar</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
         <div class="container">
-            {% include "header.html" %}
             {% block body %}
             {% endblock %}
             {% include "footer.html" %}

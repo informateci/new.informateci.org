@@ -9,7 +9,7 @@ github_status = []
 github_status_lock = RLock()
 
 class GithubCacheRepo():
-    def __init__(self, name='', desc='', comms=[]):
+    def __init__(self, name='', desc='', comms=None):
         self.name = name
         self.description = desc
         self.commits = comms
@@ -29,9 +29,10 @@ class GithubThread(Thread):
     def __init__(self, event):
         Thread.__init__(self)
         self.event = event
-        self.rifrescia()
+        GithubThread.rifrescia()
 
-    def rifrescia(self):
+    @staticmethod
+    def rifrescia():
         global github_status
         github_obj = MainClass.Github(client_id=SECURE['client_id'], client_secret=SECURE['client_secret'])
         repos = github_obj.get_user('informateci').get_repos()
@@ -47,7 +48,7 @@ class GithubThread(Thread):
 
     def run(self):
         while not self.event.wait(300):
-            self.rifrescia()
+            GithubThread.rifrescia()
 
 
 github_thread = GithubThread(task_kill)
