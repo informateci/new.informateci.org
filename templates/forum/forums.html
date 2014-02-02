@@ -1,0 +1,32 @@
+{% extends "forum/base.html" %}
+{% set forum_page = "forums" %}
+{% block head %}
+<style>
+    p.name {
+        font-style: bold;
+        font-size: 21px;
+    }
+
+    p.desc {
+        font-style: italic;
+        font-size: 16px;
+    }
+
+    li.forum-entry {
+        height: 90px;
+        padding-top: 15px;
+        padding-left: 15px;
+        list-style: none;
+    }
+</style>
+{% endblock %}
+{% block forum_body %}
+{% for c in categories %}
+    <h2>{{ c.cat_title }}</h2>
+        <ul>
+        {% for f in forums[c.cat_id] %}
+            <li class="forum-entry"><p class="name">{{ f.forum_name }}</p><p class="desc">{{ f.forum_desc }}</p></li>
+        {% endfor %}
+        </ul>
+        {% endfor %}
+{% endblock %}

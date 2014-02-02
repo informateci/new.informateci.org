@@ -1,0 +1,9 @@
+{% extends "forum/base.html" %}
+{% set forum_page = "users" %}
+{% block forum_body %}
+<ul>
+    {% for user in users %}
+        <li>{{ user.user_id }} - {{ user.username }}</li>
+    {% endfor %}
+</ul>
+{% endblock %}

@@ -42,6 +42,28 @@ def news():
     return render_template('news.html')
 
 
+from oldforum.model.forum import *
+@routes.route('/forums')
+def forums():
+    cats = [c for c in ForumCategoryModel.select()]
+    forumsd = {}
+    for c in cats:
+        if not forumsd.has_key(c.cat_id):
+            forumsd[c.cat_id] = []
+    for f in ForumModel.select():
+        forumsd[f.cat_id].append(f)
+    return render_template('forums.html', categories=cats, forums=forumsd)
+
+
+
+
 @routes.route('/profile')
 def profile():
     return render_template('profile.html')
+
+
+from oldforum.model.user import UserModel
+
+@routes.route('/users')
+def users():
+    return render_template('users.html', users=[u for u in UserModel.select()][0:10])
