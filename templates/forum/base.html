@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% set active_page = "forum" %}
+{% block body %}
+<nav class="navbar" role="navigation">
+    <div class="container">
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li {% if forum_page == "topics" %}class="active"{% endif %}><a href="/forum/topics">Topics</a></li>
+                <li {% if forum_page == "pms" %}class="active"{% endif %}><a href="/forum/pms">Private Messages</a></li>
+                <li {% if forum_page == "news" %}class="active"{% endif %}><a href="/forum/news">News</a>
+                <li {% if forum_page == "profile" %}class="active"{% endif %}><a href="/forum/profile">Profile</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+{% block forum_body %}
+{% endblock %}
+{% endblock %}

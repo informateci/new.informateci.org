@@ -8,12 +8,12 @@ prefix = '/'
 
 
 @routes.route('/')
-def index_route():
+def root():
     return render_template('index.html')
 
 
 @routes.route('/favicon.ico')
-def favicon_route():
+def favicon():
     return Response(
         base64.decodestring('iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAGXRFWHRTb\
         2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAABOtJREFUeNrkV81rXUUUPzP3vveSvEBS41P8boh\
@@ -41,3 +41,13 @@ def favicon_route():
         wADAGdc48ttRnltAAAAAElFTkSuQmCC'),
         mimetype='image/png'
     )
+
+
+@routes.route('/login', methods=["GET", "POST"])
+def login():
+    pass
+
+
+@routes.route('/logout')
+def logout():
+    pass

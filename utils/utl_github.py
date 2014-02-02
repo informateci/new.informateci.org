@@ -3,11 +3,13 @@ __author__ = 'mandrake'
 from github import MainClass
 from secure import SECURE
 from threading import Event, Thread, RLock
+import pickle
+import os.path
 
 task_kill = Event()
 github_status = []
 github_status_lock = RLock()
-
+CACHE_FILE = './cache/github_status'
 
 class GithubCacheRepo():
     def __init__(self, name='', desc='', comms=None):
@@ -30,9 +32,16 @@ class GithubCacheCommit():
 
 class GithubThread(Thread):
     def __init__(self, event):
+        global github_status
+
         Thread.__init__(self)
         self.event = event
-        GithubThread.rifrescia()
+        if os.path.isfile(CACHE_FILE):
+            f = open(CACHE_FILE, 'rb')
+            github_status = pickle.load(f)
+            f.close()
+        else:
+            GithubThread.rifrescia()
 
     @staticmethod
     def rifrescia():
@@ -45,9 +54,13 @@ class GithubThread(Thread):
             for commit in repo.get_commits():
                 comms.append(GithubCacheCommit(sha=commit.sha))
             status.append(GithubCacheRepo(name=repo.name, desc=repo.description, comms=comms))
+
+        f = open(CACHE_FILE, 'wb')
         github_status_lock.acquire(1)
         github_status = status
+        pickle.dump(github_status, f)
         github_status_lock.release()
+        f.close()
 
     def run(self):
         while not self.event.wait(300):

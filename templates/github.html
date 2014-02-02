@@ -4,6 +4,9 @@
 <style>
     .github_repo {
         list-style-type: none;
+        height: 90px;
+        padding-top: 15px;
+        padding-left: 15px;
     }
 
     .github_repo p.name {
@@ -23,7 +26,7 @@
     }
 
     .github_repo_container {
-        border: 1px solid black;
+        border-bottom: 1px solid #eeeeee;
     }
 
     .github_commit_list {
@@ -41,6 +44,7 @@
 </script>
 {% endblock %}
 {% block body %}
+<h2>Github repos</h2>
 <ul>
     {% set i = 0 %}
     {% for repo in repos %}
