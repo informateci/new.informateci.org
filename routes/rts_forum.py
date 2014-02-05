@@ -8,7 +8,7 @@ prefix = '/forum'
 
 @routes.route('/')
 def root():
-    return redirect(url_for('.topics'))
+    return redirect(url_for('.forums'))
 
 
 @routes.route('/topics/', defaults={'page': '1'})
@@ -63,6 +63,7 @@ def profile():
 
 
 from oldforum.model.user import UserModel
+
 
 @routes.route('/users')
 def users():

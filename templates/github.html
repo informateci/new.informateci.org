@@ -3,20 +3,24 @@
 {% block head %}
 <style>
     .github_repo {
+        font-family: "omnes-pro", sans-serif;
         list-style-type: none;
-        height: 90px;
-        padding-top: 15px;
-        padding-left: 15px;
+        padding: 1em 0;
     }
 
     .github_repo p.name {
-        font-style: bold;
-        font-size: 21px;
+        font-weight: bold;
+        font-size: 180%;
+        margin: 0;
+        line-height: 1.5;
     }
 
     .github_repo p.desc {
+        font-size: 120%;
         font-style: italic;
-        font-size: 16px;
+        margin: 0;
+        line-height: 1.5;
+        min-height: 1.5;
     }
 
     .github_commit {
@@ -44,24 +48,29 @@
 </script>
 {% endblock %}
 {% block body %}
-<h2>Github repos</h2>
-<ul>
-    {% set i = 0 %}
-    {% for repo in repos %}
-    <div class="github_repo_container">
-        <li class="github_repo" onclick="repo_toggle('commits{{i}}')">
-            <p class="name">{{ repo.name }}</p>
-            <p class="desc">{{ repo.description }}</p>
-        </li>
-        <ul class="github_commit_list" id="commits{{ i }}" >
-            {% for commit in repo.commits[0:10] %}
-                <li class="github_commit">
-                    <a class="hash">{{ commit.short_sha }}</a> - {{ commit.description }}
-                </li>
-            {% endfor %}
-        </ul>
-    </div>
-    {% set i = i + 1 %}
-    {% endfor %}
-</ul>
+<div class="header">
+    <h1>Github repos</h1>
+    <h2>Per l'uomo che non deve chiedere. Mai.</h2>
+</div>
+<div class="content">
+    <ul>
+        {% set i = 0 %}
+        {% for repo in repos %}
+        <div class="github_repo_container">
+            <li class="github_repo" onclick="repo_toggle('commits{{i}}')">
+                <p class="name">{{ repo.name }}</p>
+                <p class="desc">{{ repo.description }}&nbsp;</p>
+            </li>
+            <ul class="github_commit_list" id="commits{{ i }}" >
+                {% for commit in repo.commits[0:10] %}
+                    <li class="github_commit">
+                        <a class="hash">{{ commit.short_sha }}</a> - {{ commit.description }}
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% set i = i + 1 %}
+        {% endfor %}
+    </ul>
+</div>
 {% endblock %}

@@ -18,15 +18,64 @@
         padding-left: 15px;
         list-style: none;
     }
+
+    .github_repo {
+        font-family: "omnes-pro", "proxima-nova", sans-serif;
+        list-style-type: none;
+        padding: 1em 0;
+    }
+
+    .github_repo p.name {
+        font-weight: bold;
+        font-size: 180%;
+        margin: 0;
+        line-height: 1.5;
+    }
+
+    .github_repo p.desc {
+        font-size: 120%;
+        font-style: italic;
+        margin: 0;
+        line-height: 1.5;
+        min-height: 1.5;
+    }
+
+    .github_commit {
+    }
+
+    .github_commit .hash {
+    }
+
+    .github_repo_container {
+        border-bottom: 1px solid #eeeeee;
+    }
+
+    .github_commit_list {
+        display: none;
+    }
+
+    .hash {
+        font-family: monospace;
+    }
+
+    .forum .header h2 {
+        border-bottom: 1px solid #ccc;
+        padding-bottom: 0.5em;
+    }
+
 </style>
 {% endblock %}
 {% block forum_body %}
-{% for c in categories %}
-    <h2>{{ c.cat_title }}</h2>
-        <ul>
-        {% for f in forums[c.cat_id] %}
-            <li class="forum-entry"><p class="name">{{ f.forum_name }}</p><p class="desc">{{ f.forum_desc }}</p></li>
-        {% endfor %}
-        </ul>
-        {% endfor %}
-{% endblock %}
+<div class="content forum">
+    {% for c in categories %}
+        <div class="header">
+            <h2>{{ c.cat_title }}</h2>
+        </div>
+            <ul>
+            {% for f in forums[c.cat_id] %}
+                <li class="forum-entry"><p class="name">{{ f.forum_name }}</p><p class="desc">{{ f.forum_desc }}</p></li>
+            {% endfor %}
+            </ul>
+            {% endfor %}
+    {% endblock %}
+</div>
