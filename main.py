@@ -1,14 +1,22 @@
 __author__ = 'mandrake'
 
-from application import app
+from application import app, login_manager
 import config
+import signal
+import os
+import gevent
+from gevent.wsgi import WSGIServer
+
+
+
 
 # Importing routes
 mods = [
     'rts_index',
     'rts_calendar',
-    'rts_forum',
-    'rts_github'
+    'rts_api'
+    #'rts_forum',
+    #'rts_github'
 ]
 
 for mod in mods:
@@ -19,6 +27,18 @@ for mod in mods:
 
 #print app.url_map
 
+app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
+
 
 if __name__ == '__main__':
-    app.run(host=config.host, debug=config.debug)
+    gevent.signal(signal.SIGQUIT, gevent.shutdown)
+    http_server = WSGIServer((config.host, config.port), app)
+    try:
+        http_server.serve_forever()
+    except KeyboardInterrupt:
+        print "FINISH"
+        http_server.stop()
+        print "ENDE"
+        # la morte
+        pid = os.getpid()
+        os.kill(pid, 1)

@@ -2,6 +2,7 @@ __author__ = 'mandrake'
 
 import re
 import utils.web
+import BeautifulSoup
 
 _examptn = "<font face=[^>]+>([^<]+)</font>[^<]*</td><td>[^<]*<input.*value=\"([\d]+)\""
 _appelloptn = "<input type=\"hidden\" name=\"appello\" value=\"([\d]+)\">"
