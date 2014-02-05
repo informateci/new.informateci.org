@@ -104,6 +104,5 @@ class WebUnipi:
     def get_compitini(self):
         pass
 
-    def get_appelli(self):
-        print "GETAPPELLIH"
-        return parse_exam_names(course='inf31', year=2014)
+    def get_appelli(self, year=2014):
+        return parse_exam_names(course='inf31', year=year) + parse_exam_names('wif18', year=year)

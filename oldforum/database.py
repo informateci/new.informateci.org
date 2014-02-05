@@ -9,3 +9,5 @@ mysql_db = MySQLDatabase('informateci', user=secure.SECURE['mysql_user'], passwd
 class MySQLModel(Model):
     class Meta:
         database = mysql_db
+
+mysql_db.connect()
