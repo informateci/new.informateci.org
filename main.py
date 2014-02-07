@@ -7,6 +7,9 @@ import os
 import gevent
 from gevent.wsgi import WSGIServer
 
+PATH = os.path.dirname(__file__)
+
+
 
 
 
@@ -31,6 +34,7 @@ app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
 
 
 if __name__ == '__main__':
+
     gevent.signal(signal.SIGQUIT, gevent.shutdown)
     http_server = WSGIServer((config.host, config.port), app)
     try:
