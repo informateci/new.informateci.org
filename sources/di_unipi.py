@@ -6,6 +6,7 @@ import re
 import utils.web
 import BeautifulSoup
 from enum import Enum
+import datetime
 
 
 class AppelloOrCompitino(Enum):
@@ -21,52 +22,83 @@ class AppelloOrCompitino(Enum):
 
 class IstanzaEsame:
 
-    def __init__(self, n_appello=-1, n_compitino=-1, app_or_comp=None, id_esame_aa=-1, cdl='', data_inizio=None,
-                 ora_inizio=None, aule=[], sigla='', nome=''):
+    def __init__(self, n_appello=-1, app_or_comp=None, id_esame_aa=-1, cdl='', data_inizio=None, aule=[], sigla='',
+                 nome='', anno=-1, id_lista_stud=-1):
         self.n_appello = n_appello
-        self.n_compitino = n_compitino
         self.app_or_comp = app_or_comp
         self.id_esame_aa = id_esame_aa
         self.cdl = cdl
         self.data_inizio = data_inizio
-        self.ora_inizio = ora_inizio
         self.aule = aule
         self.sigla = sigla
         self.nome = nome
+        self.anno = anno
+        self.id_lista_stud = id_lista_stud
 
     def get_dict_repr(self):
         return {
-            'n_appello': self.n_appello,
-            'n_compitino': self.n_compitino,
-            'app_or_comp': self.app_or_comp,
+            'n_appello': self.n_appello / 10 if self.app_or_comp == AppelloOrCompitino.Compitino else self.n_appello,
+            'app_or_comp': AppelloOrCompitino.to_string(self.app_or_comp),
             'id_esame_aa': self.id_esame_aa,
             'cdl': self.cdl,
             'data_inizio': self.data_inizio,
-            'ora_inizio': self.ora_inizio,
             'aule': self.aule,
             'sigla': self.sigla,
-            'nome': self.nome
+            'nome': self.nome,
+            'anno': self.anno,
+            'id_lista_stud': self.id_lista_stud
         }
 
 
 class StudenteIscritto:
 
-    def __init__(self, nome='', cognome='', matricola='', commenti=''):
+    def __init__(self, nome='', cognome='', matricola=-1, commenti='', id_lista_stud=-1):
         self.nome = nome
         self.cognome = cognome
         self.matricola = matricola
         self.commenti = commenti
+        self.id_lista_stud = id_lista_stud
 
     def get_dict_repr(self):
         return {
             'nome': self.nome,
             'cognome': self.cognome,
             'matricola': self.matricola,
-            'commenti': self.commenti
+            'commenti': self.commenti,
+            'id_lista_stud': self.id_lista_stud
         }
 
 
-@cached_in(expire=60)
+@cached_in(expire=3600)
+def parse_studenti_iscritti(id_lista_stud):
+    url = "http://compass2.di.unipi.it/didattica/inf31/share/orario/Appelli/lista.asp?action=list&appello=%d" % \
+          id_lista_stud
+    bs = BeautifulSoup.BeautifulSoup(utils.web.url2html(url))
+    t = bs.findAll('table')[2]
+    ret = []
+    for tr in t.findAll('tr')[2:-1]:
+        print tr
+        try:
+            tr.findAll('td')[1].findAll('font')[0]
+        except Exception:
+            matricola = int(tr.findAll('td')[1].contents[0])
+            print matricola
+            nome = tr.findAll('td')[2].contents[0]
+            cognome = tr.findAll('td')[3].contents[0]
+            print matricola, nome, cognome
+
+            try:
+                commenti = tr.findAll('td')[4].contents[0]
+            except Exception:
+                commenti = ''
+            ret.append(
+                StudenteIscritto(nome=nome, cognome=cognome, matricola=matricola, commenti=commenti,
+                                 id_lista_stud=id_lista_stud).get_dict_repr()
+            )
+
+    return ret
+
+@cached_in(expire=3600)
 def parse_istanze_esame(course, year):
     ret = []
     for i in (range(1, 7) + [10, 20, 30, 40]):
@@ -82,22 +114,27 @@ def parse_istanze_esame(course, year):
             try:
                 sigla = tr.findAll('td')[0].findAll('font')[0].contents[0]
                 nome = tr.findAll('td')[1].findAll('font')[0].contents[0].replace('\r\n', ' ').strip()
-                id_esame_aa = tr.findAll('td')[2].findAll('input')[0].get('value')
+                id_esame_aa = int(tr.findAll('td')[2].findAll('input')[0].get('value'))
                 # TODO: vado a cercare data, ora e aule
                 dat_url = "http://compass2.di.unipi.it/didattica/inf31/share/orario/Appelli/appelliret.asp?start=%d&end=%d&chk=%d" %\
-                           (i, i, int(id_esame_aa))
+                           (i, i, id_esame_aa)
                 dat_bs = BeautifulSoup.BeautifulSoup(utils.web.url2html(dat_url))
-                dat_tds = dat_bs.findAll('table')[2].findAll('tr')[3].findAll('td')
-                print dat_tds
+                dat_tr = dat_bs.findAll('table')[2].findAll('tr')[3]
+                print dat_tr
                 print
                 try:
-                    data_inizio = dat_tds[1].contents[0].replace('\r\n', '')
-                    ora_inizio = dat_tds[2].contents[0].replace('\r\n', '')
-                    aule = [x.strip() for x in dat_tds[3].contents[0].split(',')]
+                    data = dat_tr.findAll('td')[1].contents[0].replace('\r\n', '')
+                    ora = dat_tr.findAll('td')[2].contents[0].replace('\r\n', '')
+                    print data + ' ' + ora
+                    data_inizio = datetime.datetime.strptime("%s %s" % (data, ora), "%d/%m/%Y %H.%M")
+                    aule = [x.strip() for x in dat_tr.findAll('td')[3].contents[0].split(',')]
+                    id_lista_stud = int(dat_tr.findAll('td')[4].findAll('form')[0]
+                                    .findAll('input', {'name': 'appello'})[0].get('value'))
                 except Exception:
-                    data_inizio = ''
-                    ora_inizio = ''
+                    print "eccezio!"
+                    data_inizio = None
                     aule = []
+                    id_lista
             except Exception:
                 valid = False
 
@@ -105,14 +142,14 @@ def parse_istanze_esame(course, year):
                 if i < 9:
                     ret.append(
                         IstanzaEsame(nome=nome, sigla=sigla, n_appello=i, app_or_comp=AppelloOrCompitino.Appello,
-                                     id_esame_aa=id_esame_aa, data_inizio=data_inizio, ora_inizio=ora_inizio,
-                                     aule=aule).get_dict_repr()
+                                     id_esame_aa=id_esame_aa, data_inizio=data_inizio, aule=aule, anno=int(year),
+                                     id_lista_stud=id_lista_stud).get_dict_repr()
                     )
                 else:
                     ret.append(
-                        IstanzaEsame(nome=nome, sigla=sigla, n_compitino=i, app_or_comp=AppelloOrCompitino.Compitino,
-                                     id_esame_aa=id_esame_aa, data_inizio=data_inizio, ora_inizio=ora_inizio,
-                                     aule=aule).get_dict_repr()
+                        IstanzaEsame(nome=nome, sigla=sigla, n_appello=i, app_or_comp=AppelloOrCompitino.Compitino,
+                                     id_esame_aa=id_esame_aa, data_inizio=data_inizio, aule=aule, anno=int(year),
+                                     id_lista_stud=id_lista_stud).get_dict_repr()
                     )
 
     return ret
