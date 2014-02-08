@@ -1,0 +1,793 @@
+%!PS-Adobe-3.0
+%%Creator: graphviz version 2.26.3 (20100126.1600)
+%%Title: dependencies
+%%Pages: (atend)
+%%BoundingBox: (atend)
+%%EndComments
+save
+%%BeginProlog
+/DotDict 200 dict def
+DotDict begin
+
+/setupLatin1 {
+mark
+/EncodingVector 256 array def
+ EncodingVector 0
+
+ISOLatin1Encoding 0 255 getinterval putinterval
+EncodingVector 45 /hyphen put
+
+% Set up ISO Latin 1 character encoding
+/starnetISO {
+        dup dup findfont dup length dict begin
+        { 1 index /FID ne { def }{ pop pop } ifelse
+        } forall
+        /Encoding EncodingVector def
+        currentdict end definefont
+} def
+/Times-Roman starnetISO def
+/Times-Italic starnetISO def
+/Times-Bold starnetISO def
+/Times-BoldItalic starnetISO def
+/Helvetica starnetISO def
+/Helvetica-Oblique starnetISO def
+/Helvetica-Bold starnetISO def
+/Helvetica-BoldOblique starnetISO def
+/Courier starnetISO def
+/Courier-Oblique starnetISO def
+/Courier-Bold starnetISO def
+/Courier-BoldOblique starnetISO def
+cleartomark
+} bind def
+
+%%BeginResource: procset graphviz 0 0
+/coord-font-family /Times-Roman def
+/default-font-family /Times-Roman def
+/coordfont coord-font-family findfont 8 scalefont def
+
+/InvScaleFactor 1.0 def
+/set_scale {
+       dup 1 exch div /InvScaleFactor exch def
+       scale
+} bind def
+
+% styles
+/solid { [] 0 setdash } bind def
+/dashed { [9 InvScaleFactor mul dup ] 0 setdash } bind def
+/dotted { [1 InvScaleFactor mul 6 InvScaleFactor mul] 0 setdash } bind def
+/invis {/fill {newpath} def /stroke {newpath} def /show {pop newpath} def} bind def
+/bold { 2 setlinewidth } bind def
+/filled { } bind def
+/unfilled { } bind def
+/rounded { } bind def
+/diagonals { } bind def
+
+% hooks for setting color 
+/nodecolor { sethsbcolor } bind def
+/edgecolor { sethsbcolor } bind def
+/graphcolor { sethsbcolor } bind def
+/nopcolor {pop pop pop} bind def
+
+/beginpage {	% i j npages
+	/npages exch def
+	/j exch def
+	/i exch def
+	/str 10 string def
+	npages 1 gt {
+		gsave
+			coordfont setfont
+			0 0 moveto
+			(\() show i str cvs show (,) show j str cvs show (\)) show
+		grestore
+	} if
+} bind def
+
+/set_font {
+	findfont exch
+	scalefont setfont
+} def
+
+% draw text fitted to its expected width
+/alignedtext {			% width text
+	/text exch def
+	/width exch def
+	gsave
+		width 0 gt {
+			[] 0 setdash
+			text stringwidth pop width exch sub text length div 0 text ashow
+		} if
+	grestore
+} def
+
+/boxprim {				% xcorner ycorner xsize ysize
+		4 2 roll
+		moveto
+		2 copy
+		exch 0 rlineto
+		0 exch rlineto
+		pop neg 0 rlineto
+		closepath
+} bind def
+
+/ellipse_path {
+	/ry exch def
+	/rx exch def
+	/y exch def
+	/x exch def
+	matrix currentmatrix
+	newpath
+	x y translate
+	rx ry scale
+	0 0 1 0 360 arc
+	setmatrix
+} bind def
+
+/endpage { showpage } bind def
+/showpage { } def
+
+/layercolorseq
+	[	% layer color sequence - darkest to lightest
+		[0 0 0]
+		[.2 .8 .8]
+		[.4 .8 .8]
+		[.6 .8 .8]
+		[.8 .8 .8]
+	]
+def
+
+/layerlen layercolorseq length def
+
+/setlayer {/maxlayer exch def /curlayer exch def
+	layercolorseq curlayer 1 sub layerlen mod get
+	aload pop sethsbcolor
+	/nodecolor {nopcolor} def
+	/edgecolor {nopcolor} def
+	/graphcolor {nopcolor} def
+} bind def
+
+/onlayer { curlayer ne {invis} if } def
+
+/onlayers {
+	/myupper exch def
+	/mylower exch def
+	curlayer mylower lt
+	curlayer myupper gt
+	or
+	{invis} if
+} def
+
+/curlayer 0 def
+
+%%EndResource
+%%EndProlog
+%%BeginSetup
+14 default-font-family set_font
+1 setmiterlimit
+% /arrowlength 10 def
+% /arrowwidth 5 def
+
+% make sure pdfmark is harmless for PS-interpreters other than Distiller
+/pdfmark where {pop} {userdict /pdfmark /cleartomark load put} ifelse
+% make '<<' and '>>' safe on PS Level 1 devices
+/languagelevel where {pop languagelevel}{1} ifelse
+2 lt {
+    userdict (<<) cvn ([) cvn load put
+    userdict (>>) cvn ([) cvn load put
+} if
+
+%%EndSetup
+setupLatin1
+%%Page: 1 1
+%%PageBoundingBox: 36 36 612 754
+%%PageOrientation: Portrait
+0 0 1 beginpage
+gsave
+36 36 576 718 boxprim clip newpath
+0.757895 0.757895 set_scale 0 rotate 51.5 52.5 translate
+% application.py
+gsave
+0 0 0.82745 nodecolor
+521 126 37.95 18 ellipse_path fill
+1 setlinewidth
+filled
+0 0 0 nodecolor
+521 126 37.95 18 ellipse_path stroke
+0 0 0 nodecolor
+7 /Times-Roman set_font
+495 123.7 moveto 52 (application.py) alignedtext
+grestore
+% config.py
+gsave
+0 0 0.82745 nodecolor
+521 72 27.91 18 ellipse_path fill
+1 setlinewidth
+filled
+0 0 0 nodecolor
+521 72 27.91 18 ellipse_path stroke
+0 0 0 nodecolor
+7 /Times-Roman set_font
+504 69.7 moveto 34 (config.py) alignedtext
+grestore
+% main.py
+gsave
+0 0 0.82745 nodecolor
+298 126 27 18 ellipse_path fill
+1 setlinewidth
+filled
+0 0 0 nodecolor
+298 126 27 18 ellipse_path stroke
+0 0 0 nodecolor
+7 /Times-Roman set_font
+283.5 123.7 moveto 29 (main.py) alignedtext
+grestore
+% main.py->application.py
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 325.34 126 moveto
+362.03 126 427.77 126 472.85 126 curveto
+stroke
+0 0 0 edgecolor
+newpath 472.98 129.5 moveto
+482.98 126 lineto
+472.98 122.5 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 472.98 129.5 moveto
+482.98 126 lineto
+472.98 122.5 lineto
+closepath stroke
+grestore
+% main.py->config.py
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 323.58 119.81 moveto
+363.17 110.22 439.43 91.75 484.7 80.79 curveto
+stroke
+0 0 0 edgecolor
+newpath 485.79 84.13 moveto
+494.68 78.37 lineto
+484.14 77.32 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 485.79 84.13 moveto
+494.68 78.37 lineto
+484.14 77.32 lineto
+closepath stroke
+grestore
+% oldforum
+gsave
+0 0 0.82745 nodecolor
+85 160 26.85 18 ellipse_path fill
+1 setlinewidth
+filled
+0 0 0 nodecolor
+85 160 26.85 18 ellipse_path stroke
+0 0 0 nodecolor
+7 /Times-Roman set_font
+68.5 157.7 moveto 33 (oldforum) alignedtext
+grestore
+% oldforum/database.py
+gsave
+0 0 0.82745 nodecolor
+521 207 53.02 18 ellipse_path fill
+1 setlinewidth
+filled
+0 0 0 nodecolor
+521 207 53.02 18 ellipse_path stroke
+0 0 0 nodecolor
+7 /Times-Roman set_font
+481.5 204.7 moveto 79 (oldforum/database.py) alignedtext
+grestore
+% oldforum/model
+gsave
+0 0 0.82745 nodecolor
+85 274 40.81 18 ellipse_path fill
+1 setlinewidth
+filled
+0 0 0 nodecolor
+85 274 40.81 18 ellipse_path stroke
+0 0 0 nodecolor
+7 /Times-Roman set_font
+56 271.7 moveto 58 (oldforum/model) alignedtext
+grestore
+% oldforum/model/forum.py
+gsave
+0 0 0.82745 nodecolor
+298 247 59.22 18 ellipse_path fill
+1 setlinewidth
+filled
+0 0 0 nodecolor
+298 247 59.22 18 ellipse_path stroke
+0 0 0 nodecolor
+7 /Times-Roman set_font
+252.5 244.7 moveto 91 (oldforum/model/forum.py) alignedtext
+grestore
+% oldforum/model/forum.py->oldforum/database.py
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 349.44 237.77 moveto
+383.63 231.64 428.55 223.58 463.85 217.25 curveto
+stroke
+0 0 0 edgecolor
+newpath 464.77 220.64 moveto
+474 215.43 lineto
+463.54 213.75 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 464.77 220.64 moveto
+474 215.43 lineto
+463.54 213.75 lineto
+closepath stroke
+grestore
+% oldforum/model/privmsg.py
+gsave
+0 0 0.82745 nodecolor
+85 328 64.19 18 ellipse_path fill
+1 setlinewidth
+filled
+0 0 0 nodecolor
+85 328 64.19 18 ellipse_path stroke
+0 0 0 nodecolor
+7 /Times-Roman set_font
+35.5 325.7 moveto 99 (oldforum/model/privmsg.py) alignedtext
+grestore
+% oldforum/model/topic.py
+gsave
+0 0 0.82745 nodecolor
+85 382 58.11 18 ellipse_path fill
+1 setlinewidth
+filled
+0 0 0 nodecolor
+85 382 58.11 18 ellipse_path stroke
+0 0 0 nodecolor
+7 /Times-Roman set_font
+40.5 379.7 moveto 89 (oldforum/model/topic.py) alignedtext
+grestore
+% oldforum/model/user.py
+gsave
+0 0 0.82745 nodecolor
+298 193 55.87 18 ellipse_path fill
+1 setlinewidth
+filled
+0 0 0 nodecolor
+298 193 55.87 18 ellipse_path stroke
+0 0 0 nodecolor
+7 /Times-Roman set_font
+255.5 190.7 moveto 85 (oldforum/model/user.py) alignedtext
+grestore
+% oldforum/model/user.py->oldforum/database.py
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 353.7 196.5 moveto
+385.61 198.5 425.75 201.02 458.71 203.09 curveto
+stroke
+0 0 0 edgecolor
+newpath 458.49 206.58 moveto
+468.69 203.72 lineto
+458.93 199.6 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 458.49 206.58 moveto
+468.69 203.72 lineto
+458.93 199.6 lineto
+closepath stroke
+grestore
+% routes
+gsave
+0 0 0.82745 nodecolor
+85 436 27 18 ellipse_path fill
+1 setlinewidth
+filled
+0 0 0 nodecolor
+85 436 27 18 ellipse_path stroke
+0 0 0 nodecolor
+7 /Times-Roman set_font
+73 433.7 moveto 24 (routes) alignedtext
+grestore
+% routes/rts_admin.py
+gsave
+0 0 0.82745 nodecolor
+85 490 49.17 18 ellipse_path fill
+1 setlinewidth
+filled
+0 0 0 nodecolor
+85 490 49.17 18 ellipse_path stroke
+0 0 0 nodecolor
+7 /Times-Roman set_font
+48.5 487.7 moveto 73 (routes/rts_admin.py) alignedtext
+grestore
+% routes/rts_api.py
+gsave
+0 0 0.82745 nodecolor
+85 72 42.98 18 ellipse_path fill
+1 setlinewidth
+filled
+0 0 0 nodecolor
+85 72 42.98 18 ellipse_path stroke
+0 0 0 nodecolor
+7 /Times-Roman set_font
+54.5 69.7 moveto 61 (routes/rts_api.py) alignedtext
+grestore
+% utils/generic.py
+gsave
+0 0 0.82745 nodecolor
+298 72 40.24 18 ellipse_path fill
+1 setlinewidth
+filled
+0 0 0 nodecolor
+298 72 40.24 18 ellipse_path stroke
+0 0 0 nodecolor
+7 /Times-Roman set_font
+269.5 69.7 moveto 57 (utils/generic.py) alignedtext
+grestore
+% routes/rts_api.py->utils/generic.py
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 128.1 72 moveto
+162.51 72 210.8 72 247.11 72 curveto
+stroke
+0 0 0 edgecolor
+newpath 247.49 75.5 moveto
+257.49 72 lineto
+247.49 68.5 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 247.49 75.5 moveto
+257.49 72 lineto
+247.49 68.5 lineto
+closepath stroke
+grestore
+% utils/utl_calendar.py
+gsave
+0 0 0.82745 nodecolor
+298 18 50.23 18 ellipse_path fill
+1 setlinewidth
+filled
+0 0 0 nodecolor
+298 18 50.23 18 ellipse_path stroke
+0 0 0 nodecolor
+7 /Times-Roman set_font
+261 15.7 moveto 74 (utils/utl_calendar.py) alignedtext
+grestore
+% routes/rts_api.py->utils/utl_calendar.py
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 122.1 62.59 moveto
+156.68 53.83 208.54 40.68 247 30.93 curveto
+stroke
+0 0 0 edgecolor
+newpath 248.13 34.25 moveto
+256.96 28.4 lineto
+246.41 27.47 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 248.13 34.25 moveto
+256.96 28.4 lineto
+246.41 27.47 lineto
+closepath stroke
+grestore
+% utils/generic.py->config.py
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 338.64 72 moveto
+379.7 72 442.63 72 482.8 72 curveto
+stroke
+0 0 0 edgecolor
+newpath 482.98 75.5 moveto
+492.98 72 lineto
+482.98 68.5 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 482.98 75.5 moveto
+492.98 72 lineto
+482.98 68.5 lineto
+closepath stroke
+grestore
+% sources/calendar/web_unipi.py
+gsave
+0 0 0.82745 nodecolor
+521 18 70.94 18 ellipse_path fill
+1 setlinewidth
+filled
+0 0 0 nodecolor
+521 18 70.94 18 ellipse_path stroke
+0 0 0 nodecolor
+7 /Times-Roman set_font
+465 15.7 moveto 112 (sources/calendar/web_unipi.py) alignedtext
+grestore
+% utils/utl_calendar.py->sources/calendar/web_unipi.py
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 348.05 18 moveto
+374.81 18 408.45 18 438.93 18 curveto
+stroke
+0 0 0 edgecolor
+newpath 439.13 21.5 moveto
+449.13 18 lineto
+439.13 14.5 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 439.13 21.5 moveto
+449.13 18 lineto
+439.13 14.5 lineto
+closepath stroke
+grestore
+% routes/rts_calendar.py
+gsave
+0 0 0.82745 nodecolor
+85 18 54.2 18 ellipse_path fill
+1 setlinewidth
+filled
+0 0 0 nodecolor
+85 18 54.2 18 ellipse_path stroke
+0 0 0 nodecolor
+7 /Times-Roman set_font
+44 15.7 moveto 82 (routes/rts_calendar.py) alignedtext
+grestore
+% routes/rts_calendar.py->utils/utl_calendar.py
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 139.58 18 moveto
+169.59 18 206.88 18 237.74 18 curveto
+stroke
+0 0 0 edgecolor
+newpath 237.94 21.5 moveto
+247.94 18 lineto
+237.94 14.5 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 237.94 21.5 moveto
+247.94 18 lineto
+237.94 14.5 lineto
+closepath stroke
+grestore
+% routes/rts_forum.py
+gsave
+0 0 0.82745 nodecolor
+85 220 48.06 18 ellipse_path fill
+1 setlinewidth
+filled
+0 0 0 nodecolor
+85 220 48.06 18 ellipse_path stroke
+0 0 0 nodecolor
+7 /Times-Roman set_font
+49.5 217.7 moveto 71 (routes/rts_forum.py) alignedtext
+grestore
+% routes/rts_forum.py->oldforum/model/forum.py
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 130.96 225.83 moveto
+160.77 229.6 200.06 234.59 233.05 238.77 curveto
+stroke
+0 0 0 edgecolor
+newpath 232.7 242.25 moveto
+243.07 240.04 lineto
+233.59 235.31 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 232.7 242.25 moveto
+243.07 240.04 lineto
+233.59 235.31 lineto
+closepath stroke
+grestore
+% routes/rts_forum.py->oldforum/model/user.py
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 130.96 214.17 moveto
+161.43 210.31 201.82 205.19 235.25 200.95 curveto
+stroke
+0 0 0 edgecolor
+newpath 235.9 204.4 moveto
+245.38 199.67 lineto
+235.02 197.46 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 235.9 204.4 moveto
+245.38 199.67 lineto
+235.02 197.46 lineto
+closepath stroke
+grestore
+% routes/rts_github.py
+gsave
+0 0 0.82745 nodecolor
+85 544 49.17 18 ellipse_path fill
+1 setlinewidth
+filled
+0 0 0 nodecolor
+85 544 49.17 18 ellipse_path stroke
+0 0 0 nodecolor
+7 /Times-Roman set_font
+48.5 541.7 moveto 73 (routes/rts_github.py) alignedtext
+grestore
+% utils/utl_github.py
+gsave
+0 0 0.82745 nodecolor
+298 544 45.77 18 ellipse_path fill
+1 setlinewidth
+filled
+0 0 0 nodecolor
+298 544 45.77 18 ellipse_path stroke
+0 0 0 nodecolor
+7 /Times-Roman set_font
+265 541.7 moveto 66 (utils/utl_github.py) alignedtext
+grestore
+% routes/rts_github.py->utils/utl_github.py
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 134.67 544 moveto
+166.75 544 208.57 544 241.86 544 curveto
+stroke
+0 0 0 edgecolor
+newpath 241.9 547.5 moveto
+251.9 544 lineto
+241.9 540.5 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 241.9 547.5 moveto
+251.9 544 lineto
+241.9 540.5 lineto
+closepath stroke
+grestore
+% routes/rts_index.py
+gsave
+0 0 0.82745 nodecolor
+85 598 48 18 ellipse_path fill
+1 setlinewidth
+filled
+0 0 0 nodecolor
+85 598 48 18 ellipse_path stroke
+0 0 0 nodecolor
+7 /Times-Roman set_font
+50 595.7 moveto 70 (routes/rts_index.py) alignedtext
+grestore
+% sources
+gsave
+0 0 0.82745 nodecolor
+85 652 27 18 ellipse_path fill
+1 setlinewidth
+filled
+0 0 0 nodecolor
+85 652 27 18 ellipse_path stroke
+0 0 0 nodecolor
+7 /Times-Roman set_font
+70.5 649.7 moveto 29 (sources) alignedtext
+grestore
+% sources/calendar
+gsave
+0 0 0.82745 nodecolor
+85 706 44.15 18 ellipse_path fill
+1 setlinewidth
+filled
+0 0 0 nodecolor
+85 706 44.15 18 ellipse_path stroke
+0 0 0 nodecolor
+7 /Times-Roman set_font
+53 703.7 moveto 64 (sources/calendar) alignedtext
+grestore
+% utils/web.py
+gsave
+0 0 0.82745 nodecolor
+708 18 32.93 18 ellipse_path fill
+1 setlinewidth
+filled
+0 0 0 nodecolor
+708 18 32.93 18 ellipse_path stroke
+0 0 0 nodecolor
+7 /Times-Roman set_font
+686.5 15.7 moveto 43 (utils/web.py) alignedtext
+grestore
+% sources/calendar/web_unipi.py->utils/web.py
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 592.76 18 moveto
+617.02 18 643.34 18 664.69 18 curveto
+stroke
+0 0 0 edgecolor
+newpath 664.74 21.5 moveto
+674.74 18 lineto
+664.74 14.5 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 664.74 21.5 moveto
+674.74 18 lineto
+664.74 14.5 lineto
+closepath stroke
+grestore
+% utils
+gsave
+0 0 0.82745 nodecolor
+85 760 27 18 ellipse_path fill
+1 setlinewidth
+filled
+0 0 0 nodecolor
+85 760 27 18 ellipse_path stroke
+0 0 0 nodecolor
+7 /Times-Roman set_font
+77 757.7 moveto 16 (utils) alignedtext
+grestore
+% utils/utl_aliceunipi.py
+gsave
+0 0 0.82745 nodecolor
+85 814 53.02 18 ellipse_path fill
+1 setlinewidth
+filled
+0 0 0 nodecolor
+85 814 53.02 18 ellipse_path stroke
+0 0 0 nodecolor
+7 /Times-Roman set_font
+45.5 811.7 moveto 79 (utils/utl_aliceunipi.py) alignedtext
+grestore
+% utils/utl_diunipi.py
+gsave
+0 0 0.82745 nodecolor
+85 868 45.83 18 ellipse_path fill
+1 setlinewidth
+filled
+0 0 0 nodecolor
+85 868 45.83 18 ellipse_path stroke
+0 0 0 nodecolor
+7 /Times-Roman set_font
+51.5 865.7 moveto 67 (utils/utl_diunipi.py) alignedtext
+grestore
+% utils/utl_oldforum.py
+gsave
+0 0 0.82745 nodecolor
+85 922 50.79 18 ellipse_path fill
+1 setlinewidth
+filled
+0 0 0 nodecolor
+85 922 50.79 18 ellipse_path stroke
+0 0 0 nodecolor
+7 /Times-Roman set_font
+47.5 919.7 moveto 75 (utils/utl_oldforum.py) alignedtext
+grestore
+endpage
+showpage
+grestore
+%%PageTrailer
+%%EndPage: 1
+%%Trailer
+%%Pages: 1
+%%BoundingBox: 36 36 612 754
+end
+restore
+%%EOF
