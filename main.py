@@ -27,14 +27,14 @@ for mod in mods:
     m = getattr(q, mod)
     app.register_blueprint(m.routes, url_prefix=m.prefix)
 
-
-#print app.url_map
+print app.url_map
 
 app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
 
 
 if __name__ == '__main__':
-
+    app.run(debug=config.debug, host=config.host)
+    '''
     gevent.signal(signal.SIGQUIT, gevent.shutdown)
     http_server = WSGIServer((config.host, config.port), app)
     try:
@@ -45,4 +45,4 @@ if __name__ == '__main__':
         print "ENDE"
         # la morte
         pid = os.getpid()
-        os.kill(pid, 1)
+        os.kill(pid, 1)'''

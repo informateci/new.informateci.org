@@ -15,7 +15,7 @@ CACHE_TYPE = {
 
 def name_to_class(s):  # da nome a oggetto corrispondente
     if s in globals().keys() and issubclass(globals()[s], SolidCache):
-            return globals()[s]
+        return globals()[s]
     return None
 
 
@@ -103,7 +103,7 @@ class RedisCache(SolidCache):
     def keys(self):
         return [eval(k.replace(self.cache_name, '')) for k in self.cache.keys(self.cache_name+'*')]
 
-    def split(self): # butta meta' delle entry con una qualche policy
+    def split(self):  # butta meta' delle entry con una qualche policy
         for k in self.cache.keys(self.cache_name+'*')[:self.dimension()/2]:
             self.cache.delete(str(k))
 
@@ -122,8 +122,8 @@ class PickleCache(SolidCache):
 
         self.cache_name = name
         self.cache_path = os.path.join(PATH, cache_path)
-        self.cache_file = os.path.join(self.cache_path, name) # sperabilmente il nome di funzione non contiene char
-                                                              # speciali quindi ok per un file. (assunzione scema?)
+        self.cache_file = os.path.join(self.cache_path, name)  # sperabilmente il nome di funzione non contiene char
+                                                               # speciali quindi ok per un file. (assunzione scema?)
         try:  # mi assicuro che la directory dove scrivero' esista e sia buona
             os.makedirs(self.cache_path)
         except OSError:
