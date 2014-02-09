@@ -8,6 +8,7 @@ import BeautifulSoup
 from enum import Enum
 import datetime
 
+
 class AppelloOrCompitino(Enum):
     Appello = 0
     Compitino = 1
@@ -127,7 +128,7 @@ def parse_istanze_esame(course, year):
                     dat_tr_all = dat_tr.findAll('td')
                     data = dat_tr_all[1].text
                     ora = dat_tr_all[2].text
-                    print data + ' ' + ora
+                    # print data + ' ' + ora
                     data_inizio = datetime.datetime.strptime("%s %s" % (data, ora), "%d/%m/%Y %H.%M")
                     aule = [x for x in dat_tr_all[3].text.split(',')]
                     id_lista_stud = int(dat_tr_all[4].find('input', {'name': 'appello'}).get('value'))

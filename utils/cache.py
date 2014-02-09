@@ -89,7 +89,8 @@ class RedisCache(SolidCache):
         self.cache.set(self.cache_name+k, v)
 
     def clear(self):
-        self.cache.delete(self.cache_name+'*')
+        for k in self.cache.keys(self.cache_name+'*'):
+            self.cache.delete(k)
 
     def save(self):
         self.cache.bgsave()

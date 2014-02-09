@@ -12,7 +12,7 @@ cache_type = "redis"
 # se serve etc etc
 redis_host = "localhost"
 redis_port = 6379
-redis_db   = 0
+redis_db = 0
 
 
 ########## API
