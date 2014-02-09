@@ -8,7 +8,6 @@ import BeautifulSoup
 from enum import Enum
 import datetime
 
-
 class AppelloOrCompitino(Enum):
     Appello = 0
     Compitino = 1
@@ -98,6 +97,7 @@ def parse_studenti_iscritti(id_lista_stud):
 
     return ret
 
+
 @cached_in(expire=3600)
 def parse_istanze_esame(course, year):
     ret = []
@@ -112,29 +112,33 @@ def parse_istanze_esame(course, year):
             valid = True
 
             try:
-                sigla = tr.findAll('td')[0].findAll('font')[0].contents[0]
-                nome = tr.findAll('td')[1].findAll('font')[0].contents[0].replace('\r\n', ' ').strip()
-                id_esame_aa = int(tr.findAll('td')[2].findAll('input')[0].get('value'))
+                trall = tr.findAll('td')
+                sigla = trall[0].find('font').text
+                nome = trall[1].find('font').text
+                id_esame_aa = int(trall[2].find('input').get('value'))
                 # TODO: vado a cercare data, ora e aule
                 dat_url = "http://compass2.di.unipi.it/didattica/inf31/share/orario/Appelli/appelliret.asp?start=%d&end=%d&chk=%d" %\
                            (i, i, id_esame_aa)
                 dat_bs = BeautifulSoup.BeautifulSoup(utils.web.url2html(dat_url))
                 dat_tr = dat_bs.findAll('table')[2].findAll('tr')[3]
-                print dat_tr
-                print
+                #print dat_tr
+                #print
                 try:
-                    data = dat_tr.findAll('td')[1].contents[0].replace('\r\n', '')
-                    ora = dat_tr.findAll('td')[2].contents[0].replace('\r\n', '')
+                    dat_tr_all = dat_tr.findAll('td')
+                    data = dat_tr_all[1].text
+                    ora = dat_tr_all[2].text
                     print data + ' ' + ora
                     data_inizio = datetime.datetime.strptime("%s %s" % (data, ora), "%d/%m/%Y %H.%M")
-                    aule = [x.strip() for x in dat_tr.findAll('td')[3].contents[0].split(',')]
-                    id_lista_stud = int(dat_tr.findAll('td')[4].findAll('form')[0]
-                                    .findAll('input', {'name': 'appello'})[0].get('value'))
+                    aule = [x for x in dat_tr_all[3].text.split(',')]
+                    id_lista_stud = int(dat_tr_all[4].find('input', {'name': 'appello'}).get('value'))
+
                 except Exception:
                     print "eccezio!"
                     data_inizio = None
                     aule = []
-                    id_lista
+                    print dat_tr
+                    print "=" * 40
+                    #id_lista
             except Exception:
                 valid = False
 
